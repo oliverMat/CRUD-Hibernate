@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+body {
+	font-size: 10spx;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+	text-align: center;
+	width: 100%;
+	
+	background-color: #fffafa;
+}
+
+header {
+	padding: 5px 0px;
+	margin-bottom: 20px;
+	height: 25px;
+	background-color: #545454;
+	color: #fff;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+h1 {
+	margin: 0 auto;
+	width: 50%;
+}
+
+#conteudo {
+	display: inline-block;
+}
+
+}
+#cabecalho {
+	margin: 0 auto;
+	width: 50%;
+}
+
+footer {
+	padding: 0px 8px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}

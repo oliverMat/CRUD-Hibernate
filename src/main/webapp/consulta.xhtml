@@ -1,0 +1,158 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Dashboard</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form id="c">
+
+			<p:messages id="msgs" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin: 10px">
+
+				<p:toolbarGroup>
+
+					<p:commandButton value="Voltar" action="index" process="@this" />
+
+
+					<p:commandButton value="Exibir todos" update=":c"
+						action="#{consultaBean.exibirTodos}" process="@this" />
+
+				</p:toolbarGroup>
+
+
+				<p:toolbarGroup align="left" style="  margin-left: 187px">
+
+					<p:outputLabel value="Pesquisa:" />
+					<p:inputText style=" margin-right: 10px ; margin-left: 10px"
+						required="true" requiredMessage="Nome Obrigatorio" size="50"
+						value="#{consultaBean.funcionario.nome}">
+					</p:inputText>
+
+
+					<p:commandButton style=" margin-right: 10px ; margin-left: 10px"
+						value="Pesquisar" update=":c"
+						actionListener="#{consultaBean.pesquisar}" partialSubmit="true"
+						ajax="true" />
+
+				</p:toolbarGroup>
+
+
+				<p:toolbarGroup align="right">
+
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+
+			<p:dataTable paginator="true" paginatorPosition="bottom" id="tabela"
+				emptyMessage="Nada Aqui"
+				style="margin-top:20px ; margin-right: 10px ; margin-left: 10px "
+				value="#{consultaBean.todos}" var="fun" editable="true">
+
+
+				<p:ajax event="rowEdit" listener="#{consultaBean.onRowEdit}" />
+				<p:ajax event="rowEditCancel" listener="#{consultaBean.onRowCancel}" />
+
+				<p:column headerText="Nome">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{fun.nome}" />
+						</f:facet>
+
+						<f:facet name="input">
+							<h:inputText value="#{fun.nome}" style="width:100%" label="Name" />
+						</f:facet>
+
+					</p:cellEditor>
+
+				</p:column>
+
+				<p:column headerText="Data Nascimento">
+
+					<h:outputText value="#{fun.dataNascimento}" />
+
+				</p:column>
+
+				<p:column headerText="CPF">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{fun.cpf}" />
+						</f:facet>
+
+						<f:facet name="input">
+							<h:inputText value="#{fun.cpf}" style="width:100%" label="CPF" />
+						</f:facet>
+
+					</p:cellEditor>
+
+
+				</p:column>
+
+				<p:column headerText="Salario">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{fun.salario}" />
+						</f:facet>
+
+						<f:facet name="input">
+							<h:inputText value="#{fun.salario}" style="width:100%"
+								label="Salario" />
+						</f:facet>
+
+					</p:cellEditor>
+
+				</p:column>
+
+				<p:column>
+
+					<p:commandButton value="Excluir"
+						oncomplete="PF('confirmacaoExcluir').show()" process="@this"
+						update=":c:confirmacaoExcluirDialog">
+
+
+						<f:setPropertyActionListener value="#{fun}"
+							target="#{consultaBean.funcionarioSelecionado}" />
+
+					</p:commandButton>
+
+					<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit"
+						saveTitle="Salvar Row" />
+
+				</p:column>
+
+
+			</p:dataTable>
+
+
+			<p:confirmDialog header="Excluir Funcionario"
+				message="Tem certeza que deseja excluir: #{consultaBean.funcionarioSelecionado.nome} ?"
+				widgetVar="confirmacaoExcluir" id="confirmacaoExcluirDialog">
+
+
+				<p:button value="Nao"
+					onclick="PF('confirmacaoExcluir').hide();return false;" />
+
+				<p:commandButton value="Sim"
+					onclick="PF('confirmacaoExcluir').hide();"
+					action="#{consultaBean.excluir}" process="@this" update=":c:tabela" />
+
+
+			</p:confirmDialog>
+
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,78 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Dashboard</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form id="c">
+
+			<p:messages id="msgs" autoUpdate="true" closable="true" />
+
+
+			<p:toolbar style="margin-top: 20px">
+
+				<p:toolbarGroup>
+
+					<p:button value="Novo" outcome="index" />
+
+					<p:commandButton value="Salvar" update=":c"
+						actionListener="#{validacaoBean.salvar}" partialSubmit="true"
+						ajax="true" />
+
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Consulta" action="consulta"
+						process="@this" />
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+
+			<p:panelGrid columns="2" id="painel" style="margin-top: 20px">
+
+
+				<p:outputLabel value="Nome" />
+				<p:inputText required="true" requiredMessage="Nome Obrigatorio"
+					size="50" value="#{validacaoBean.funcionario.nome}">
+				</p:inputText>
+
+
+				<p:outputLabel value="Data Nascimento" />
+				<p:calendar required="true" requiredMessage="Data Obrigatorio"
+					value="#{validacaoBean.funcionario.dataNascimento}" size="50">
+					<f:convertDateTime pattern="dd/MM/yyyy"
+						timeZone="America/Sao_Paulo" />
+				</p:calendar>
+
+
+				<p:outputLabel value="CPF" />
+				<p:inputMask required="true" requiredMessage="CPF Obrigatorio"
+					mask="999.999.999-99" value="#{validacaoBean.funcionario.cpf}"
+					size="50" />
+
+				<p:outputLabel value="Salario" />
+				<p:inputNumber required="true" requiredMessage="Salario Obrigatorio"
+					decimalSeparator="," thousandSeparator="."
+					value="#{validacaoBean.funcionario.salario}" size="50" />
+
+			</p:panelGrid>
+
+
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
