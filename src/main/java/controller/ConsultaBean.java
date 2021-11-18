@@ -1,11 +1,12 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.inject.Inject;
 
 import org.omnifaces.util.Messages;
@@ -14,17 +15,20 @@ import org.primefaces.event.RowEditEvent;
 import dao.Funcionario_DAO;
 import model.Funcionario;
 
-@ManagedBean(name = "consultaBean")
+@Named
 @ViewScoped
-public class ConsultaBean {
+public class ConsultaBean implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Funcionario funcionario;
+	transient private Funcionario funcionario;
 
 	private List<Funcionario> todos = new ArrayList<Funcionario>();
 
 	@Inject
-	private Funcionario_DAO dao;
+	transient private Funcionario_DAO dao;
 
 	private Funcionario funcionarioSelecionado;
 

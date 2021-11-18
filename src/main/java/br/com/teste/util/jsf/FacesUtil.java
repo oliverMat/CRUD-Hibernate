@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 public class FacesUtil {
 
@@ -74,19 +74,21 @@ public class FacesUtil {
             Logger.getLogger(FacesUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-	
+
 	/**
 	 * Executa JavaScript
 	 */
 	public static void execute(String value) {
-		RequestContext.getCurrentInstance().execute(value);
+		//RequestContext.getCurrentInstance().execute(value);
+		PrimeFaces.current().executeScript(value);
 	}
 
 	/**
 	 * Atualiza form
 	 */
 	public static void update(String value) { 
-		RequestContext.getCurrentInstance().update(value);
+		//RequestContext.getCurrentInstance().update(value);
+		PrimeFaces.current().executeScript(value);
 	}
 	
 }

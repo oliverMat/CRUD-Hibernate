@@ -1,11 +1,12 @@
 package controller;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import javax.inject.Inject;
 
 import org.omnifaces.util.Messages;
@@ -13,15 +14,18 @@ import org.omnifaces.util.Messages;
 import dao.Funcionario_DAO;
 import model.Funcionario;
 
-@ManagedBean(name = "validacaoBean")
+@Named
 @ViewScoped
-public class ValidacaoBean {
+public class ValidacaoBean implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Funcionario funcionario;
+	transient private Funcionario funcionario;
 
 	@Inject
-	private Funcionario_DAO dao;
+	transient private Funcionario_DAO dao;
 
 	public void salvar() {
 

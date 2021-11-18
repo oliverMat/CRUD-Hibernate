@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,11 +10,10 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+
 @Entity
 @Table(name = "funcionario")
-public class Funcionario implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Funcionario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
